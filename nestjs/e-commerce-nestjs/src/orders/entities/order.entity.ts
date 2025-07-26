@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeUpdate } from 'typeorm';
 
 @Entity('order_info')
 export class OrderInfoEntity {
@@ -16,4 +16,11 @@ export class OrderInfoEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt?: Date;
+
+  @BeforeUpdate()
+  updateTimestamp() {
+    const now = new Date();
+    now.setHours(now.getHours() - 7);
+    this.updatedAt = now;
+  }
 }
