@@ -4,16 +4,19 @@ import { ValidationPipe, BadRequestException } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   await app.listen(process.env.PORT ?? 3000);
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-      forbidNonWhitelisted: true, 
+      forbidNonWhitelisted: true,
       transform: true,
       exceptionFactory: (errors) => {
         const messages = errors.map((error) => ({
           field: error.property,
-          message: error.constraints ? Object.values(error.constraints).join('. ') + '.' : '',
+          message: error.constraints
+            ? Object.values(error.constraints).join('. ') + '.'
+            : '',
         }));
         return new BadRequestException({ errors: messages });
       },
