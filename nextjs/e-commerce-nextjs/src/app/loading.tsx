@@ -1,9 +1,10 @@
 "use client";
 import CircularWithValueLabel from "@/components/mui/progress/loading";
+import { Box } from "@mui/material";
 export default function Loading() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <Box style={{ display: 'flex', justifyItems: 'center', alignItems: 'center', height: '100vh' }}>
       <CircularWithValueLabel />
-    </div>
+    </Box>
   );
 }
