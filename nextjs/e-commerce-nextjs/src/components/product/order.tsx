@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import ProductOrderContext from "@/context/productContext";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CustomPaginationTable from "@/components/mui/table/table-pagination";
 
@@ -24,6 +24,27 @@ export default function OrdersComponent() {
     });
     setTotalPrice(total);
   };
+  const submitHandler = async () => {
+    if (productsInOrder.length === 0) {
+      alert("No products in order to submit.");
+      return;
+    }
+    const orderData = productsInOrder.map((product) => ({
+      productId: product.id,
+      quantity: product.quantity,
+    }));
+    const response = await fetch("http://localhost:3002/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to submit order");
+    }
+  };
+
   useEffect(() => {
     calculateTotalPrice();
   }, [productsInOrder]);
@@ -59,6 +80,14 @@ export default function OrdersComponent() {
       <Typography variant="subtitle2" sx={{ mt: 1 }}>
         Total Price: ${totalPrice.toFixed(2)}
       </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mt: 2 }}
+        onClick={submitHandler}
+      >
+        Confirm Order
+      </Button>
     </Box>
   );
 }

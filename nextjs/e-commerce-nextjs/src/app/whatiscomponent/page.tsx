@@ -39,13 +39,16 @@ export default function WhatiscomponentPage() {
   return (
     <Box>
       <ResponsiveAppBar
-        logo="MY LOGO"
-        pages={["Home", "About", "Contact"]}
-        settings={["Profile", "Logout"]}
-        avatarSrc="/static/images/avatar/2.jpg"
-        onPageClick={(page) => alert(`ไปหน้า ${page}`)}
-        onSettingClick={(setting) => alert(`เลือก ${setting}`)}
-      />
+            logo="MY LOGO"
+            pages={[
+              { label: "Home", href: "/" },
+              { label: "About", href: "/about" },
+              { label: "Orders", href: "/order" },
+              { label: "Products", href: "/product" },
+            ]}
+            settings={["Profile", "Logout"]}
+            avatarSrc="https://robohash.org/7b4fecbc8b873e2e3329baf33208c9f6?set=set4&bgset=bg1&size=200x200"
+          />
         <CustomBreadcrumb
             items={[
                 { label: "Home", href: "/" },

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -9,6 +10,7 @@ import Typography from '@mui/material/Typography';
 export interface BasicCardProps {
   backgroundColor?: string;
   textColor?: string;
+  id?: number;
   title?: string;
   subtitle?: string;
   description?: string;
@@ -28,6 +30,7 @@ const bull = (
 const BasicCard: React.FC<BasicCardProps> = ({
   backgroundColor = "#f0f4ff",
   textColor = "#1e293b",
+  id,
   title = "Word of the Day",
   subtitle = "adjective",
   description = 'well meaning and kindly.\n"a benevolent smile"',
@@ -38,12 +41,15 @@ const BasicCard: React.FC<BasicCardProps> = ({
     <Box sx={{ minWidth: 275 }}>
       <Card sx={{ backgroundColor, color: textColor }}>
         <CardContent>
-          <Typography gutterBottom sx={{ color: textColor, fontSize: 14 }}>
-            {title}
-          </Typography>
-          <Typography variant="h5" component="div">
-            be{bull}nev{bull}o{bull}lent
-          </Typography>
+          <Link href={id ? `/product/${id}` : "#"} style={{ textDecoration: "none" }}>
+            <Typography
+              variant="h5"
+              component="div"
+              sx={{ cursor: "pointer", color: textColor }}
+            >
+              {title}
+            </Typography>
+          </Link>
           <Typography sx={{ color: textColor, mb: 1.5 }}>
             {subtitle}
           </Typography>
