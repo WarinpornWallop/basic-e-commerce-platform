@@ -1,20 +1,26 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+"use client";
+import * as React from "react";
+import Link from "next/link";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
 
+export interface PageItem {
+  label: string;
+  href: string;
+}
 export interface ResponsiveAppBarProps {
   logo?: React.ReactNode;
-  pages?: string[];
+  pages?: PageItem[];
   settings?: string[];
   avatarSrc?: string;
   onPageClick?: (page: string) => void;
@@ -29,8 +35,12 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({
   onPageClick,
   onSettingClick,
 }) => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -53,7 +63,13 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({
     <AppBar position="static" color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', mr: 2 }}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              mr: 2,
+            }}
+          >
             {typeof logo === "string" ? (
               <Typography
                 variant="h6"
@@ -61,19 +77,21 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({
                 component="a"
                 href="#"
                 sx={{
-                  fontFamily: 'monospace',
+                  fontFamily: "monospace",
                   fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
                 }}
               >
                 {logo}
               </Typography>
-            ) : logo}
+            ) : (
+              logo
+            )}
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="open navigation"
@@ -88,27 +106,40 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={() => handleCloseNavMenu()}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                <MenuItem key={page.label} onClick={() => handleCloseNavMenu(page.label)}>
+                  <Link href={page.href} key={page.label} passHref>
+                    <Button
+                      sx={{ my: 2, color: "white", display: "block" }}
+                      onClick={() => handleCloseNavMenu(page.label)}
+                    >
+                      {page.label}
+                    </Button>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', mr: 2 }}>
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
+              mr: 2,
+            }}
+          >
             {typeof logo === "string" ? (
               <Typography
                 variant="h5"
@@ -117,27 +148,30 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({
                 href="#"
                 sx={{
                   flexGrow: 1,
-                  fontFamily: 'monospace',
+                  fontFamily: "monospace",
                   fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
                 }}
               >
                 {logo}
               </Typography>
-            ) : logo}
+            ) : (
+              logo
+            )}
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => handleCloseNavMenu(page)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link href={page.href} key={page.label} passHref>
+                <Button
+                  onClick={() => handleCloseNavMenu(page.label)}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.label}
+                </Button>
+              </Link>
             ))}
           </Box>
 
@@ -148,24 +182,31 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
               id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "left",
               }}
-              open={Boolean(anchorElUser)}
-              onClose={() => handleCloseUserMenu()}
+              open={Boolean(anchorElNav)}
+              onClose={() => handleCloseNavMenu()}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+              {pages.map((page) => (
+                <MenuItem
+                  key={page.label}
+                  onClick={() => handleCloseNavMenu(page.label)}
+                >
+                  <Link href={page.href} passHref>
+                    <Button sx={{ color: "white", display: "block" }}>
+                      {page.label}
+                    </Button>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
