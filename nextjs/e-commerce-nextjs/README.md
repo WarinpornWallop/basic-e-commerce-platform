@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Commerce Next.js + NestJS + PostgreSQL
 
-## Getting Started
+โปรเจกต์นี้เป็นตัวอย่างระบบ E-Commerce โดยใช้ Next.js (frontend)
 
-First, run the development server:
+## การติดตั้งและรันโปรเจกต์
+
+### 1. สร้างโปรเจกต์ใหม่ Next.js
+
+```bash
+npx create-next-app@latest ชื่อโปรเจกต์
+cd ชื่อโปรเจกต์
+```
+
+### 2. ติดตั้ง Material UI (MUI)
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+### 3. ติดตั้ง Font Roboto
+
+```bash
+npm install @fontsource/roboto
+```
+
+### 4. ติดตั้ง MUI Icons
+
+```bash
+npm install @mui/icons-material
+```
+
+### 5. รัน Frontend (Next.js)
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## เพจที่มีในระบบ
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` : หน้าแรก
+- `/product` : รายการสินค้า
+- `/product/[id]` : รายละเอียดสินค้า
+- `/order` : รายการสินค้าในออเดอร์
+- `/add-product` : เพิ่มสินค้าใหม่
+- `/edit-product/[id]` : แก้ไขสินค้า
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ใช้ Package อะไรบ้าง
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `next`
+- `react`
+- `@mui/material`
+- `@emotion/react`
+- `@emotion/styled`
+- `@mui/icons-material`
+- `@fontsource/roboto`
