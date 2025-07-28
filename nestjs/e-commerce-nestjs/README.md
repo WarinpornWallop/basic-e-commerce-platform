@@ -1,98 +1,121 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## การติดตั้งและใช้งาน NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### 1. ติดตั้ง NestJS CLI
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
+ติดตั้ง CLI ของ NestJS แบบ global ด้วย npm:
 ```bash
-$ npm install
+npm install -g @nestjs/cli
 ```
 
-## Compile and run the project
+### 2. สร้างโปรเจกต์ใหม่
 
+สร้างโปรเจกต์ใหม่ด้วย CLI:
 ```bash
-# development
-$ npm run start
+nest new my-nest-app
+```
+(เปลี่ยนชื่อ my-nest-app เป็นชื่อโปรเจกต์ที่ต้องการ)
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+เข้าไปในโฟลเดอร์โปรเจกต์:
+```bash
+cd my-nest-app
 ```
 
-## Run tests
+### 3. รันเซิร์ฟเวอร์ NestJS
 
+เริ่มเซิร์ฟเวอร์สำหรับพัฒนา:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### 4. สร้าง resource สำหรับ products
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+สร้าง resource (controller, service, module) สำหรับ products:
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+nest g resource products
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 5. ติดตั้ง dependencies ที่จำเป็น
 
-## Resources
+- สำหรับ validation form:
+```bash
+npm install class-validator class-transformer
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+- สำหรับเชื่อมต่อ PostgreSQL ด้วย TypeORM:
+```bash
+npm install --save @nestjs/typeorm typeorm pg
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+### 6. เปิดใช้งาน CORS (สำคัญสำหรับเชื่อมต่อ API จาก frontend)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**ก่อนจะ get API จาก Next.js หรือ frontend อื่น ต้องเปิด CORS ใน main.ts:**
 
-## Stay in touch
+```typescript
+// main.ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.enableCors();
+  await app.listen(Port); 
+}
+bootstrap();
+```
 
-## License
+**ถ้าไม่เปิด CORS จะ fetch API จาก frontend ไม่ได้**
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+### สรุป package ที่ใช้
+
+- @nestjs/core, @nestjs/common, @nestjs/cli
+- @nestjs/typeorm, typeorm, pg
+- class-validator, class-transformer
+
+---
+
+### หมายเหตุ
+
+- ต้องมี PostgreSQL ติดตั้งและสร้าง database ก่อนใช้งาน
+- เปิดใช้งาน CORS ทุกครั้งที่ต้องการเชื่อมต่อ API จาก frontend
+
+---
+
+### ตัวอย่าง Flow ของ CRUD: Create Product
+
+1. **Frontend**  
+   - ผู้ใช้กรอกข้อมูลสินค้าใหม่ในหน้า Add Product แล้วกด submit  
+   - ส่ง HTTP POST มาที่ API `/products` พร้อมข้อมูลสินค้า
+
+2. **Controller** (`products.controller.ts`)  
+   - รับ request ที่ฟังก์ชัน `create(@Body() createProductDto: CreateProductDto)`  
+   - เรียกใช้ service: `this.productsService.create(createProductDto)`
+
+3. **Service** (`products.service.ts`)  
+   - ฟังก์ชัน `create(createProductDto: CreateProductDto)`  
+   - สร้าง entity ใหม่ด้วย repository:  
+     `const product = this.productRepository.create(createProductDto);`  
+   - บันทึกลง database:  
+     `return await this.productRepository.save(product);`
+
+4. **Module** (`products.module.ts`)  
+   - เชื่อมโยง controller, service, และ entity ผ่าน TypeORM
+
+5. **Database**  
+   - TypeORM จะ map entity ไปยัง table ใน PostgreSQL  
+   - ข้อมูลสินค้าถูกบันทึกลง table `product_info`
+
+![ตัวอย่าง Flow ของ CRUD: Create Product](./public/product-flow.png)
+
+**สรุป Flow:**  
+- Frontend → Controller (`create`) → Service (`create`) → Repository (`create`, `save`) → Database
+
+**ตัวอย่างชื่อฟังก์ชันแต่ละไฟล์:**  
+- Controller: `create`  
+- Service: `create`  
+- Repository: `create`, `save`
