@@ -29,10 +29,12 @@ export default function OrdersComponent() {
       alert("No products in order to submit.");
       return;
     }
-    const orderData = productsInOrder.map((product) => ({
-      productId: product.id,
-      quantity: product.quantity,
-    }));
+    const orderData = [...productsInOrder]
+      .sort((a, b) => a.id - b.id)
+      .map((product) => ({
+        productId: product.id,
+        quantity: product.quantity,
+      }));
     const response = await fetch("http://localhost:3002/orders", {
       method: "POST",
       headers: {
@@ -63,14 +65,17 @@ export default function OrdersComponent() {
           { key: "quantity", label: "Quantity", align: "right" },
           { key: "total", label: "Total", align: "right" },
         ]}
-        rows={productsInOrder.map((product) => ({
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          price: `$${product.price.toFixed(2)}`,
-          quantity: product.quantity,
-          total: `$${(product.price * product.quantity).toFixed(2)}`,
-        }))}
+        rows={[...productsInOrder]
+          .sort((a, b) => a.id - b.id)
+          .map((product) => ({
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: `$${product.price.toFixed(2)}`,
+            quantity: product.quantity,
+            total: `$${(product.price * product.quantity).toFixed(2)}`,
+          }))
+        }
         rowsPerPageOptions={[5, 10, 20]}
         tableLabel="Order List Table"
       />
