@@ -27,7 +27,7 @@ export class ProductsService {
   }
 
   async findAll(): Promise<ProductInfoEntity[]> {
-    return await this.productRepository.find();
+    return this.productRepository.find();
   }
 
   
@@ -47,7 +47,7 @@ export class ProductsService {
     if (!product) {
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
-    return await this.productRepository.save(product);
+    return this.productRepository.save(product);
   }
 
   async remove(id: number): Promise<{ message: string }> {
