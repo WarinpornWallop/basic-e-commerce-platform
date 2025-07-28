@@ -122,6 +122,14 @@ export default function WhatiscomponentPage() {
               Button Usage
             </Typography>
             <ButtonUsage />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => alert("Button Clicked!")}
+              sx={{ mt: 2, backgroundColor: "#ffeb3b", color: "#ffffff" }}
+            >
+              Click Me
+            </Button>
           </Grid>
 
           <Grid size={{ xs: 12 }}>
