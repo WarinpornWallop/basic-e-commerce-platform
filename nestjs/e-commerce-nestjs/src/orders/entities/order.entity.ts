@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeUpdate } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeUpdate, ManyToOne } from 'typeorm';
+import { ProductInfoEntity } from '../../products/entities/product.entity';
 
 @Entity('order_info')
 export class OrderInfoEntity {
@@ -16,6 +17,9 @@ export class OrderInfoEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt?: Date;
+
+  // @ManyToOne(() => ProductInfoEntity)
+  // product: ProductInfoEntity;
 
   @BeforeUpdate()
   updateTimestamp() {
